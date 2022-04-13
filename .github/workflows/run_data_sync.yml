@@ -117,7 +117,7 @@ jobs:
           git config --global --add safe.directory /github/workspace
 
       - name: Push new runs
-        uses: github-actions-x/commit@v2.6
+        uses: chenzaichun/commit@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "Add new runs"
