@@ -2,6 +2,7 @@
 
 import gettext
 import locale
+import os
 from collections import defaultdict
 from datetime import datetime
 
@@ -128,6 +129,9 @@ class Poster:
             self.__draw_tracks(d, XY(width - 20, height - 30 - 30), XY(10, 30))
         else:
             self.__draw_tracks(d, XY(width - 20, height), XY(10, 0))
+        output_dir = os.path.dirname(output)
+        if output_dir:
+            os.makedirs(output_dir, exist_ok=True)
         d.save()
 
     def m2u(self, m):
