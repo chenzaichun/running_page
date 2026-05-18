@@ -171,61 +171,6 @@ class Poster:
                 counts["10K"] += 1
         return counts
 
-    def __draw_race_distance_stats(self, d, text_color, header_style, small_value_style, value_style):
-        if self.drawer_type != "title" or not self.tracks:
-            return
-
-        categories = [
-            (name, count)
-            for name, count in self._count_race_distance_stats(self.tracks).items()
-            if count > 0
-        ]
-        if not categories:
-            return
-
-        use_zh = self.language and str(self.language).lower().startswith("zh")
-        races_title = "Races" if not use_zh else "Races"
-        dim_color = "#888888"
-
-        y_pos = self.height - 38
-        d.add(
-            d.text(
-                races_title,
-                insert=(10, y_pos),
-                fill=dim_color,
-                style=header_style,
-            )
-        )
-        y_pos += 6
-        race_num = 1
-        for name, count in categories:
-            d.add(
-                d.text(
-                    str(race_num),
-                    insert=(10, y_pos),
-                    fill=dim_color,
-                    style="font-size:8px; font-family:Arial;",
-                )
-            )
-            d.add(
-                d.text(
-                    name,
-                    insert=(22, y_pos),
-                    fill=text_color,
-                    style="font-size:9px; font-family:Arial; font-weight:bold;",
-                )
-            )
-            d.add(
-                d.text(
-                    f"{count}x",
-                    insert=(48, y_pos),
-                    fill=dim_color,
-                    style=small_value_style,
-                )
-            )
-            y_pos += 5
-            race_num += 1
-
     def __draw_footer(self, d):
         text_color = self.colors["text"]
         header_style = "font-size:4px; font-family:Arial"
@@ -242,10 +187,6 @@ class Poster:
             max_length,
             weeks,
         ) = self.__compute_track_statistics()
-
-        self.__draw_race_distance_stats(
-            d, text_color, header_style, small_value_style, value_style
-        )
 
         d.add(
             d.text(
@@ -355,6 +296,17 @@ class Poster:
                 style=small_value_style,
             )
         )
+
+        if self.drawer_type == "title" and self.tracks:
+            rc = self._count_race_distance_stats(self.tracks)
+            d.add(
+                d.text(
+                    f">10k: {rc['10K']}   Half marathon: {rc['Half']}   Marathon: {rc['Full']}",
+                    insert=(120, self.height - 5),
+                    fill=text_color,
+                    style=small_value_style,
+                )
+            )
 
     def __compute_track_statistics(self):
         length_range = ValueRange()
