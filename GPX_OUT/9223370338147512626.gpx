@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd" version="1.1" creator="gpx.py -- https://github.com/tkrajina/gpxpy">
+  <trk>
+    <name>gpx from keep</name>
+    <type>Walk</type>
+    <trkseg>
+      <trkpt lat="29.602540972414058" lon="106.3195784589959">
+        <ele>261.616943359375</ele>
+        <time>2023-10-30T23:06:00Z</time>
+      </trkpt>
+      <trkpt lat="29.602437864973574" lon="106.31960850163284">
+        <ele>261.68927001953125</ele>
+        <time>2023-10-30T23:06:09Z</time>
+      </trkpt>
+      <trkpt lat="29.602407904415312" lon="106.31967669420841">
+        <ele>261.91064453125</ele>
+        <time>2023-10-30T23:06:15Z</time>
+      </trkpt>
+      <trkpt lat="29.60243300460459" lon="106.31973947147631">
+        <ele>261.2371826171875</ele>
+        <time>2023-10-30T23:06:21Z</time>
+      </trkpt>
+      <trkpt lat="29.60243313616849" lon="106.31981253295774">
+        <ele>257.9268798828125</ele>
+        <time>2023-10-30T23:06:30Z</time>
+      </trkpt>
+      <trkpt lat="29.602401823777058" lon="106.31987856076316">
+        <ele>258.098388671875</ele>
+        <time>2023-10-30T23:06:36Z</time>
+      </trkpt>
+      <trkpt lat="29.602287918603228" lon="106.31988262660471">
+        <ele>252.1522216796875</ele>
+        <time>2023-10-30T23:06:48Z</time>
+      </trkpt>
+      <trkpt lat="29.60210880922236" lon="106.31994947509887">
+        <ele>250.52655029296875</ele>
+        <time>2023-10-30T23:07:00Z</time>
+      </trkpt>
+      <trkpt lat="29.602042909384124" lon="106.31995056146626">
+        <ele>253.6944580078125</ele>
+        <time>2023-10-30T23:07:06Z</time>
+      </trkpt>
+      <trkpt lat="29.60203001836148" lon="106.32002660023623">
+        <ele>254.896728515625</ele>
+        <time>2023-10-30T23:07:12Z</time>
+      </trkpt>
+      <trkpt lat="29.6021528839639" lon="106.3200165807049">
+        <ele>250.4898681640625</ele>
+        <time>2023-10-30T23:07:24Z</time>
+      </trkpt>
+      <trkpt lat="29.602128876438037" lon="106.32009153773127">
+        <ele>251.83367919921875</ele>
+        <time>2023-10-30T23:07:30Z</time>
+      </trkpt>
+      <trkpt lat="29.602189922945982" lon="106.32021763254338">
+        <ele>249.57684326171875</ele>
+        <time>2023-10-30T23:07:42Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>
