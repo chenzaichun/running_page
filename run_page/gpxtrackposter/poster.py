@@ -58,11 +58,13 @@ class Poster:
         self.years = None
         self.tracks_drawer = None
         self.trans = None
+        self.language = None
         self.set_language(None)
         self.tc_offset = datetime.now(pytz.timezone("Asia/Shanghai")).utcoffset()
         self.github_style = "align-firstday"
 
     def set_language(self, language):
+        self.language = language
         if language:
             try:
                 locale.setlocale(locale.LC_ALL, f"{language}.utf8")
@@ -152,6 +154,74 @@ class Poster:
         title_style = "font-size:12px; font-family:Arial; font-weight:bold;"
         d.add(d.text(self.title, insert=(10, 20), fill=text_color, style=title_style))
 
+    def _count_race_distance_stats(self, tracks):
+        """10K / Half / Full counts — same thresholds as year_summary_drawer."""
+        counts = {"10K": 0, "Half": 0, "Full": 0}
+        for track in tracks:
+            dist_km = track.length / 1000.0
+            if dist_km >= 42.0:
+                counts["Full"] += 1
+            elif dist_km >= 21.0:
+                counts["Half"] += 1
+            elif dist_km >= 10.0:
+                counts["10K"] += 1
+        return counts
+
+    def __draw_race_distance_stats(self, d, text_color, header_style, small_value_style, value_style):
+        if self.drawer_type != "title" or not self.tracks:
+            return
+
+        categories = [
+            (name, count)
+            for name, count in self._count_race_distance_stats(self.tracks).items()
+            if count > 0
+        ]
+        if not categories:
+            return
+
+        use_zh = self.language and str(self.language).lower().startswith("zh")
+        races_title = "Races" if not use_zh else "Races"
+        dim_color = "#888888"
+
+        y_pos = self.height - 38
+        d.add(
+            d.text(
+                races_title,
+                insert=(10, y_pos),
+                fill=dim_color,
+                style=header_style,
+            )
+        )
+        y_pos += 6
+        race_num = 1
+        for name, count in categories:
+            d.add(
+                d.text(
+                    str(race_num),
+                    insert=(10, y_pos),
+                    fill=dim_color,
+                    style="font-size:8px; font-family:Arial;",
+                )
+            )
+            d.add(
+                d.text(
+                    name,
+                    insert=(22, y_pos),
+                    fill=text_color,
+                    style="font-size:9px; font-family:Arial; font-weight:bold;",
+                )
+            )
+            d.add(
+                d.text(
+                    f"{count}x",
+                    insert=(48, y_pos),
+                    fill=dim_color,
+                    style=small_value_style,
+                )
+            )
+            y_pos += 5
+            race_num += 1
+
     def __draw_footer(self, d):
         text_color = self.colors["text"]
         header_style = "font-size:4px; font-family:Arial"
@@ -168,6 +238,10 @@ class Poster:
             max_length,
             weeks,
         ) = self.__compute_track_statistics()
+
+        self.__draw_race_distance_stats(
+            d, text_color, header_style, small_value_style, value_style
+        )
 
         d.add(
             d.text(
